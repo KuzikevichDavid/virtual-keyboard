@@ -401,7 +401,11 @@
   },
   {
     "name": "ArrowUp",
-    "type": "control"
+    "type": "symbol",
+    "values": {
+      "origin": "⯅",
+      "alt": "⯅"
+    }
   },
   {
     "name": "ShiftRight",
@@ -433,15 +437,27 @@
   },
   {
     "name": "ArrowLeft",
-    "type": "control"
+    "type": "symbol",
+    "values": {
+      "origin": "⯇",
+      "alt": "⯇"
+    }
   },
   {
     "name": "ArrowDown",
-    "type": "control"
+    "type": "symbol",
+    "values": {
+      "origin": "⯆",
+      "alt": "⯆"
+    }
   },
   {
     "name": "ArrowRight",
-    "type": "control"
+    "type": "symbol",
+    "values": {
+      "origin": "⯈",
+      "alt": "⯈"
+    }
   },
   {
     "name": "ControlRight",

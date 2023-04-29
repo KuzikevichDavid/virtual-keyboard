@@ -32,8 +32,12 @@ document.addEventListener(
 );
 
 const area = document.createElement('textarea');
+area.classList.add('keyboard-output')
+document.querySelector('body').appendChild(area);
 
 area.onkeydown = (e) => {
   console.log('press textarea');
   return false;
 }
+
+await import('./keyboard-gen.js');
