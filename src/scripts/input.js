@@ -7,7 +7,20 @@ function paste(text) {
 }
 
 export function input(keyCode) {
-  let key = document.querySelector(`[class=${keyCode}]`);
-  let val = key.querySelector('.origin')?.textContent;
-  if (val) paste(val);
+  let key = document.querySelector(`.${keyCode}`);
+  if (key) {
+    let val = key.querySelector('.origin')?.textContent;
+    if (val) paste(val);
+  }
 }
+
+export const area = document.createElement('textarea');
+area.classList.add('keyboard-output');
+area.setAttribute('type', 'text');
+area.setAttribute('readonly', '');
+document.querySelector('body').appendChild(area);
+
+area.onkeydown = () => {
+  console.log('press textarea');
+  return false;
+};
