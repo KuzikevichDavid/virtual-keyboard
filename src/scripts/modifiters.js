@@ -8,9 +8,8 @@ const caseUpHide = new CSSStyleSheet();
 caseUpShow.replaceSync('.alt { display: block; }');
 caseUpHide.replaceSync('.alt { display: none; }');
 
-let isCanModifyCaps = true;
-let flagCaps = false;
-let flagShift = false;
+export let flagCaps = false;
+export let flagShift = false;
 
 const capsShow = new CSSStyleSheet()
 capsShow.insertRule('[class^="Key"] .origin { display: none !important; }');

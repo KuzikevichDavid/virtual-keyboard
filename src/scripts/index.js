@@ -1,4 +1,5 @@
 import { DataSaver } from "./dataSave.js";
+import { input } from "./input.js";
 // await import('./key-gen.js');
 import { keyUp, keyDown } from './modifiters.js';
 
@@ -19,6 +20,7 @@ document.addEventListener(
   'keydown',
   function (event) {
     keyDown(event)
+    input(event.code)
     // console.log('pres', event.ctrlKey, event.altKey, event.metaKey, event.shiftKey);
     // console.log(event.key)
   },
@@ -34,8 +36,9 @@ document.addEventListener(
   },
 );
 
-const area = document.createElement('textarea');
+export const area = document.createElement('textarea');
 area.classList.add('keyboard-output')
+area.setAttribute('type', 'text');
 document.querySelector('body').appendChild(area);
 
 area.onkeydown = (e) => {
