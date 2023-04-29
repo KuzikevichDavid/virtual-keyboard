@@ -74,6 +74,12 @@ keyboardEn.forEach((key, i) => {
       case 'MetaLeft':
         initControlKey(newKey, langStyleList, 'Win');
         break;
+      case 'ArrowUp':
+      case 'ArrowLeft':
+      case 'ArrowDown':
+      case 'ArrowRight':
+        initControlKey(newKey, langStyleList, key.value);
+        break;
       default:
         initControlKey(newKey, langStyleList, key.name);
         break;

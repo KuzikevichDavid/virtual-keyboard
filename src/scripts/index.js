@@ -1,5 +1,6 @@
 import { DataSaver } from "./dataSave.js";
 // await import('./key-gen.js');
+import { keyUp, keyDown } from './modifiters.js';
 
 const storage = new DataSaver();
 const storageKey = 'lang';
@@ -17,17 +18,19 @@ window.addEventListener('load', (e) => {
 document.addEventListener(
   'keydown',
   function (event) {
-    console.log('pres', event.ctrlKey, event.altKey, event.metaKey, event.shiftKey);
-    console.log(event.key)
+    keyDown(event)
+    // console.log('pres', event.ctrlKey, event.altKey, event.metaKey, event.shiftKey);
+    // console.log(event.key)
   },
 );
 
 document.addEventListener(
   'keyup',
   function (event) {
-    console.log('up', event.ctrlKey, event.altKey, event.metaKey, event.shiftKey);
-    console.log(event.key);
-    console.log(event)
+    keyUp(event)
+    // console.log('up', event.ctrlKey, event.altKey, event.metaKey, event.shiftKey);
+    // console.log(event.key);
+    // console.log(event)
   },
 );
 
@@ -41,3 +44,4 @@ area.onkeydown = (e) => {
 }
 
 await import('./keyboard-gen.js');
+// await import('./modifiters.js');
