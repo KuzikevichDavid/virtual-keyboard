@@ -1,6 +1,6 @@
 const res = [];
 
-window.addEventListener("keyup", (e) => {
+window.addEventListener('keyup', (e) => {
   let name = e.code;
   let type = '';
   let alt = '';
@@ -8,10 +8,10 @@ window.addEventListener("keyup", (e) => {
     type = 'control';
   } else {
     if (e.key.match(/[a-zа-яё]/i)) {
-      type = 'letter'
-      alt = e.key.toUpperCase()
+      type = 'letter';
+      alt = e.key.toUpperCase();
     } else if (e.key.match(/[^a-z]/i)) {
-      type = 'symbol'
+      type = 'symbol';
     }
   }
   if (e.key.length === 1) {
@@ -19,11 +19,10 @@ window.addEventListener("keyup", (e) => {
   } else {
     res.push({ name, type });
   }
-
-})
+});
 
 function download(content, fileName, contentType) {
-  var a = document.createElement("a");
+  var a = document.createElement('a');
   var file = new Blob([content], { type: contentType });
   a.href = URL.createObjectURL(file);
   a.download = fileName;
@@ -32,6 +31,6 @@ function download(content, fileName, contentType) {
 
 document.createElement('button').className = 'download';
 
-document.querySelector('.download').addEventListener('click', (e) => {
+document.querySelector('.download').addEventListener('click', () => {
   download(JSON.stringify(res), '.json', 'text/plain');
-})
+});

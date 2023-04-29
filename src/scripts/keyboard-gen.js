@@ -10,39 +10,39 @@ const originStyle = 'origin';
 const altStyle = 'alt';
 const controlStyle = 'control';
 const langStyleList = ['en', 'ru'];
-const keyboardStyle = 'keyboard'
+const keyboardStyle = 'keyboard';
 
-const keyboard = document.createElement('div')
-keyboard.classList.add(keyboardStyle)
+const keyboard = document.createElement('div');
+keyboard.classList.add(keyboardStyle);
 
-const indexes = [-1, 13, 28, 41, 54]
+const indexes = [-1, 13, 28, 41, 54];
 let idx = 0;
 let keyRow;
 
 function initLangKey(key, langStyle) {
-  let langKeyOrigin = document.createElement('span')
-  langKeyOrigin.classList.add(originStyle)
-  langKeyOrigin.textContent = key.values.origin
+  let langKeyOrigin = document.createElement('span');
+  langKeyOrigin.classList.add(originStyle);
+  langKeyOrigin.textContent = key.values.origin;
 
-  let langKeyAlt = document.createElement('span')
-  langKeyAlt.classList.add(altStyle)
-  langKeyAlt.textContent = key.values.alt
+  let langKeyAlt = document.createElement('span');
+  langKeyAlt.classList.add(altStyle);
+  langKeyAlt.textContent = key.values.alt;
 
-  let langKey = document.createElement('button')
+  let langKey = document.createElement('button');
   langKey.appendChild(langKeyAlt);
   langKey.appendChild(langKeyOrigin);
   langKey.classList.add(langStyle);
-  return langKey
+  return langKey;
 }
 
 function initControlKey(key, langStyleList, name) {
-  langStyleList.forEach(langStyle => {
-    let langKey = document.createElement('button')
+  langStyleList.forEach((langStyle) => {
+    let langKey = document.createElement('button');
     langKey.classList.add(langStyle);
-    let langKeyName = document.createElement('span')
+    let langKeyName = document.createElement('span');
     langKeyName.classList.add(controlStyle);
     langKeyName.textContent = name;
-    langKey.appendChild(langKeyName)
+    langKey.appendChild(langKeyName);
     key.appendChild(langKey);
   });
 }
@@ -54,8 +54,9 @@ keyboardEn.forEach((key, i) => {
     keyRow.classList.add(rowStyle);
     idx++;
   }
-  let newKey = document.createElement('div')
-  newKey.classList.add(key.name)
+  let newKey = document.createElement('div');
+  newKey.classList.add(key.name);
+  newKey.classList.add(keyStyle);
 
   if (key.type === 'control') {
     switch (key.name) {
@@ -85,8 +86,8 @@ keyboardEn.forEach((key, i) => {
         break;
     }
   } else {
-    newKey.appendChild(initLangKey(key, langStyleList[0]))
-    newKey.appendChild(initLangKey(keyboardRu[i], langStyleList[1]))
+    newKey.appendChild(initLangKey(key, langStyleList[0]));
+    newKey.appendChild(initLangKey(keyboardRu[i], langStyleList[1]));
   }
   keyRow.appendChild(newKey);
 });

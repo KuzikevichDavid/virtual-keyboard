@@ -11,12 +11,14 @@ caseUpHide.replaceSync('.alt { display: none; }');
 export let flagCaps = false;
 export let flagShift = false;
 
-const capsShow = new CSSStyleSheet()
+const capsShow = new CSSStyleSheet();
 capsShow.insertRule('[class^="Key"] .origin { display: none !important; }');
 
-const capsShiftShow = new CSSStyleSheet()
+const capsShiftShow = new CSSStyleSheet();
 capsShiftShow.insertRule('[class^="Key"] .alt { display: none !important; }');
-capsShiftShow.insertRule('[class^="Key"] .origin { display: block !important; }');
+capsShiftShow.insertRule(
+  '[class^="Key"] .origin { display: block !important; }',
+);
 
 export const keyDown = (e) => {
   if (e.shiftKey) {

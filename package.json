@@ -1,0 +1,30 @@
+{
+  "name": "virtual-keyboard",
+  "version": "1.0.0",
+  "description": "rss school task",
+  "main": "index.js",
+  "scripts": {
+    "lint": "npx eslint ./src/**/*.js --fix",
+    "format": "prettier --write \"src/**/*.js\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KuzikevichDavid/virtual-keyboard.git"
+  },
+  "keywords": [
+    "JS",
+    "virtual-keyboard"
+  ],
+  "author": "Davyd",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KuzikevichDavid/virtual-keyboard/issues"
+  },
+  "homepage": "https://github.com/KuzikevichDavid/virtual-keyboard#readme",
+  "devDependencies": {
+    "eslint": "^8.39.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "prettier": "2.8.8"
+  }
+}
