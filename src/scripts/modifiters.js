@@ -1,3 +1,5 @@
+import { changeLang, getCurLang } from "./lang.js";
+
 const caseDownShow = new CSSStyleSheet();
 const caseDownHide = new CSSStyleSheet();
 caseDownShow.replaceSync('.origin { display: block; }');
@@ -10,14 +12,15 @@ caseUpHide.replaceSync('.alt { display: none; }');
 
 export let flagCaps = false;
 export let flagShift = false;
+let langFlag = false;
 
 const capsShow = new CSSStyleSheet();
-capsShow.insertRule('[class^="Key"] .origin { display: none !important; }');
+capsShow.insertRule('[class^="letter"] .origin { display: none !important; }');
 
 const capsShiftShow = new CSSStyleSheet();
-capsShiftShow.insertRule('[class^="Key"] .alt { display: none !important; }');
+capsShiftShow.insertRule('[class^="letter"] .alt { display: none !important; }');
 capsShiftShow.insertRule(
-  '[class^="Key"] .origin { display: block !important; }',
+  '[class^="letter"] .origin { display: block !important; }',
 );
 
 export const keyDown = (e) => {
@@ -29,29 +32,38 @@ export const keyDown = (e) => {
       document.adoptedStyleSheets = [capsShiftShow, caseUpShow, caseDownHide];
     }
   }
+
+  if (e.ctrlKey && e.altKey) {
+    langFlag = true
+  }
 };
 
 export const keyUp = (e) => {
   if (e.key === 'Shift') {
     flagShift = false;
-    document.adoptedStyleSheets = [];
+    document.adoptedStyleSheets = [getCurLang()];
     if (flagCaps) {
-      document.adoptedStyleSheets = [capsShow];
+      document.adoptedStyleSheets = [capsShow, getCurLang()];
     }
   }
 
   if (e.code === 'CapsLock') {
     flagCaps = !flagCaps;
     if (flagCaps) {
-      document.adoptedStyleSheets = [capsShow];
+      document.adoptedStyleSheets = [capsShow, getCurLang()];
       if (flagShift) {
-        document.adoptedStyleSheets = [capsShiftShow, caseUpShow, caseDownHide];
+        document.adoptedStyleSheets = [capsShiftShow, caseUpShow, caseDownHide, getCurLang()];
       }
     } else {
-      document.adoptedStyleSheets = [];
+      document.adoptedStyleSheets = [getCurLang()];
       if (flagShift) {
-        document.adoptedStyleSheets = [caseUpShow, caseDownHide];
+        document.adoptedStyleSheets = [caseUpShow, caseDownHide, getCurLang()];
       }
     }
+  }
+
+  if ((e.ctrlKey || e.altKey) && langFlag) {
+    langFlag = false;
+    changeLang();
   }
 };

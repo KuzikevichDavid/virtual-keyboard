@@ -26,4 +26,3 @@ document.addEventListener('keyup', function (event) {
 });
 
 await import('./keyboard-gen.js');
-// await import('./modifiters.js');

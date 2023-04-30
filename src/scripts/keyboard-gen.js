@@ -55,8 +55,9 @@ keyboardEn.forEach((key, i) => {
     idx++;
   }
   let newKey = document.createElement('div');
-  newKey.classList.add(key.name);
   newKey.classList.add(keyStyle);
+  newKey.classList.add(key.name);
+  newKey.classList.add(key.type);
 
   if (key.type === 'control') {
     switch (key.name) {

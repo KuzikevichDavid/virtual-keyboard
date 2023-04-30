@@ -1,26 +1,72 @@
-import { area } from './index.js';
+import { flagCaps, flagShift } from "./modifiters.js";
 
 function paste(text) {
   let [start, end] = [area.selectionStart, area.selectionEnd];
   area.value =
     area.value.substring(0, start) + text + area.value.substring(end);
+  area.selectionStart = start + 1;
+  area.selectionEnd = area.selectionStart;
+}
+
+function del(direction) {
+  let [start, end] = [area.selectionStart, area.selectionEnd];
+  console.log(area.ariaRowIndex)
+  if (direction === 'right') {
+    area.value =
+      area.value.substring(0, start) + area.value.substring(end + 1);
+    area.selectionStart = start;
+  } else {
+    area.value =
+      area.value.substring(0, start - 1) + area.value.substring(end);
+    area.selectionStart = start - 1;
+  }
+  area.selectionEnd = area.selectionStart;
 }
 
 export function input(keyCode) {
   let key = document.querySelector(`.${keyCode}`);
   if (key) {
-    let val = key.querySelector('.origin')?.textContent;
-    if (val) paste(val);
+    if (!key.classList.contains('control')) {
+      let query = '.origin';
+      if (flagShift) {
+        query = '.alt'
+      }
+      if (key.classList.contains('letter') && flagCaps) {
+        query = '.alt'
+        if (flagShift) {
+          query = '.origin'
+        }
+      }
+      let val = key.querySelector(query)?.textContent;
+      if (val) paste(val);
+    } else {
+      switch (keyCode) {
+        case 'Enter':
+          paste('\n\r');
+          break;
+        case 'Tab':
+          paste('\t');
+          break;
+        case 'Backspace':
+          del('left')
+          break;
+        case 'Delete':
+          del('right')
+          break;
+        // TODO Arrows
+        default:
+          break;
+      }
+    }
   }
 }
 
 export const area = document.createElement('textarea');
 area.classList.add('keyboard-output');
 area.setAttribute('type', 'text');
-area.setAttribute('readonly', '');
 document.querySelector('body').appendChild(area);
 
-area.onkeydown = () => {
-  console.log('press textarea');
+area.onkeydown = (e) => {
+  console.log('press textarea', e);
   return false;
 };
