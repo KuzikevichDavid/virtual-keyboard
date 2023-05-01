@@ -1,4 +1,4 @@
-import { get, set } from './dataSave';
+import { get, set } from './dataSave.js';
 
 const showRu = new CSSStyleSheet();
 showRu.insertRule('.ru { display: block; }');

@@ -1,7 +1,7 @@
-import { input } from './input';
+import { input } from './input.js';
 // await import('./key-gen.js');
-import genKeyboard from './keyboard-gen';
-import { keyUp, keyDown } from './modifiters';
+import genKeyboard from './keyboard-gen.js';
+import { keyUp, keyDown } from './modifiters.js';
 
 export const doAnimation = (keyCode) => {
   const key = document.querySelector(`.${keyCode}`);
