@@ -12,3 +12,13 @@ document.addEventListener('keyup', function (event) {
 });
 
 await import('./keyboard-gen.js');
+
+const body = document.querySelector('body');
+
+const keyboardCreateInfo = document.createElement('p');
+keyboardCreateInfo.innerText = 'Created on OS "Windows 10"';
+const keyboardCahngeLang = document.createElement('p');
+keyboardCahngeLang.innerText = 'To change language press "CTRL" + "ALT"';
+
+body.appendChild(keyboardCreateInfo);
+body.appendChild(keyboardCahngeLang);

@@ -1,3 +1,6 @@
+import { input } from './input.js';
+import { caps, shiftDown, shiftUp } from './modifiters.js';
+
 const responseEn = await fetch('./scripts/jsonData/en.json');
 const keyboardEn = await responseEn.json();
 
@@ -91,6 +94,23 @@ keyboardEn.forEach((key, i) => {
     newKey.appendChild(initLangKey(keyboardRu[i], langStyleList[1]));
   }
   keyRow.appendChild(newKey);
+
+  if (key.name.includes('Shift')) {
+    newKey.addEventListener('mousedown', () => shiftDown());
+    newKey.addEventListener('mouseup', () => shiftUp());
+  } else if (key.name.includes('CapsLock')) {
+    newKey.addEventListener('mouseup', () => caps());
+  } else {
+    newKey.addEventListener('mouseup', (e) => {
+      let elem;
+      if (e.target instanceof HTMLSpanElement) {
+        elem = e.target.parentNode.parentNode.classList[1];
+      } else {
+        elem = e.target.parentNode.classList[1];
+      }
+      input(elem);
+    });
+  }
 });
 
 keyboard.appendChild(keyRow);

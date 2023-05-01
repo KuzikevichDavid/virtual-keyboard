@@ -22,19 +22,31 @@ const capsShiftShow = new CSSStyleSheet();
 capsShiftShow.insertRule('.letter .alt { display: none !important; }');
 capsShiftShow.insertRule('.letter .origin { display: block !important; }');
 
+export const shiftDown = () => {
+  flagShift = true;
+  document.adoptedStyleSheets = [caseUpShow, caseDownHide, getCurLang()];
+
+  if (flagCaps) {
+    document.adoptedStyleSheets = [
+      capsShiftShow,
+      caseUpShow,
+      caseDownHide,
+      getCurLang(),
+    ];
+  }
+};
+
+export const shiftUp = () => {
+  flagShift = false;
+  document.adoptedStyleSheets = [getCurLang()];
+  if (flagCaps) {
+    document.adoptedStyleSheets = [capsShow, getCurLang()];
+  }
+};
+
 export const keyDown = (e) => {
   if (e.shiftKey) {
-    flagShift = true;
-    document.adoptedStyleSheets = [caseUpShow, caseDownHide, getCurLang()];
-
-    if (flagCaps) {
-      document.adoptedStyleSheets = [
-        capsShiftShow,
-        caseUpShow,
-        caseDownHide,
-        getCurLang(),
-      ];
-    }
+    shiftDown();
   }
 
   if (e.ctrlKey && e.altKey) {
@@ -42,33 +54,33 @@ export const keyDown = (e) => {
   }
 };
 
+export const caps = () => {
+  flagCaps = !flagCaps;
+  if (flagCaps) {
+    document.adoptedStyleSheets = [capsShow, getCurLang()];
+    if (flagShift) {
+      document.adoptedStyleSheets = [
+        capsShiftShow,
+        caseUpShow,
+        caseDownHide,
+        getCurLang(),
+      ];
+    }
+  } else {
+    document.adoptedStyleSheets = [getCurLang()];
+    if (flagShift) {
+      document.adoptedStyleSheets = [caseUpShow, caseDownHide, getCurLang()];
+    }
+  }
+};
+
 export const keyUp = (e) => {
   if (e.key === 'Shift') {
-    flagShift = false;
-    document.adoptedStyleSheets = [getCurLang()];
-    if (flagCaps) {
-      document.adoptedStyleSheets = [capsShow, getCurLang()];
-    }
+    shiftUp();
   }
 
   if (e.code === 'CapsLock') {
-    flagCaps = !flagCaps;
-    if (flagCaps) {
-      document.adoptedStyleSheets = [capsShow, getCurLang()];
-      if (flagShift) {
-        document.adoptedStyleSheets = [
-          capsShiftShow,
-          caseUpShow,
-          caseDownHide,
-          getCurLang(),
-        ];
-      }
-    } else {
-      document.adoptedStyleSheets = [getCurLang()];
-      if (flagShift) {
-        document.adoptedStyleSheets = [caseUpShow, caseDownHide, getCurLang()];
-      }
-    }
+    caps();
   }
 
   if ((e.ctrlKey || e.altKey) && langFlag) {
