@@ -1,4 +1,4 @@
-import { changeLang, getCurLang } from "./lang.js";
+import { changeLang, getCurLang } from './lang.js';
 
 const caseDownShow = new CSSStyleSheet();
 const caseDownHide = new CSSStyleSheet();
@@ -28,12 +28,17 @@ export const keyDown = (e) => {
     document.adoptedStyleSheets = [caseUpShow, caseDownHide, getCurLang()];
 
     if (flagCaps) {
-      document.adoptedStyleSheets = [capsShiftShow, caseUpShow, caseDownHide, getCurLang()];
+      document.adoptedStyleSheets = [
+        capsShiftShow,
+        caseUpShow,
+        caseDownHide,
+        getCurLang(),
+      ];
     }
   }
 
   if (e.ctrlKey && e.altKey) {
-    langFlag = true
+    langFlag = true;
   }
 };
 
@@ -51,7 +56,12 @@ export const keyUp = (e) => {
     if (flagCaps) {
       document.adoptedStyleSheets = [capsShow, getCurLang()];
       if (flagShift) {
-        document.adoptedStyleSheets = [capsShiftShow, caseUpShow, caseDownHide, getCurLang()];
+        document.adoptedStyleSheets = [
+          capsShiftShow,
+          caseUpShow,
+          caseDownHide,
+          getCurLang(),
+        ];
       }
     } else {
       document.adoptedStyleSheets = [getCurLang()];

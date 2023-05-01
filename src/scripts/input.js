@@ -1,5 +1,5 @@
-import { currentLang } from "./lang.js";
-import { flagCaps, flagShift } from "./modifiters.js";
+import { currentLang } from './lang.js';
+import { flagCaps, flagShift } from './modifiters.js';
 
 function paste(text) {
   let [start, end] = [area.selectionStart, area.selectionEnd];
@@ -11,17 +11,20 @@ function paste(text) {
 
 function del(direction) {
   let [start, end] = [area.selectionStart, area.selectionEnd];
-  console.log(area.ariaRowIndex)
+  console.log(area.ariaRowIndex);
   if (direction === 'right') {
-    area.value =
-      area.value.substring(0, start) + area.value.substring(end + 1);
+    area.value = area.value.substring(0, start) + area.value.substring(end + 1);
     area.selectionStart = start;
   } else {
-    area.value =
-      area.value.substring(0, start - 1) + area.value.substring(end);
+    area.value = area.value.substring(0, start - 1) + area.value.substring(end);
     area.selectionStart = start - 1;
   }
   area.selectionEnd = area.selectionStart;
+}
+
+function arrows(keyCode) {
+  let val = document.querySelector(`.${keyCode} span`).innerHTML;
+  paste(val);
 }
 
 export function input(keyCode) {
@@ -30,12 +33,12 @@ export function input(keyCode) {
     if (!key.classList.contains('control')) {
       let query = '.origin';
       if (flagShift) {
-        query = '.alt'
+        query = '.alt';
       }
       if (key.classList.contains('letter') && flagCaps) {
-        query = '.alt'
+        query = '.alt';
         if (flagShift) {
-          query = '.origin'
+          query = '.origin';
         }
       }
       let val = key.querySelector(query)?.textContent;
@@ -49,12 +52,17 @@ export function input(keyCode) {
           paste('\t');
           break;
         case 'Backspace':
-          del('left')
+          del('left');
           break;
         case 'Delete':
-          del('right')
+          del('right');
           break;
-        // TODO Arrows
+        case 'ArrowUp':
+        case 'ArrowLeft':
+        case 'ArrowDown':
+        case 'ArrowRight':
+          arrows(keyCode);
+          break;
         default:
           break;
       }
