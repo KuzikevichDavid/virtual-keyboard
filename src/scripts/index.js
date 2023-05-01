@@ -1,17 +1,30 @@
 import { input } from './input.js';
 // await import('./key-gen.js');
+import genKeyboard from './keyboard-gen.js';
 import { keyUp, keyDown } from './modifiters.js';
 
-document.addEventListener('keydown', function (event) {
+export const doAnimation = (keyCode) => {
+  const key = document.querySelector(`.${keyCode}`);
+  key?.classList.add('highlights');
+};
+
+export const disAnimation = (keyCode) => {
+  const key = document.querySelector(`.${keyCode}`);
+  key?.classList.remove('highlights');
+};
+
+document.addEventListener('keydown', (event) => {
   keyDown(event);
   input(event.code);
+  doAnimation(event.code);
 });
 
-document.addEventListener('keyup', function (event) {
+document.addEventListener('keyup', (event) => {
   keyUp(event);
+  disAnimation(event.code);
 });
 
-await import('./keyboard-gen.js');
+await genKeyboard(disAnimation, doAnimation);
 
 const body = document.querySelector('body');
 

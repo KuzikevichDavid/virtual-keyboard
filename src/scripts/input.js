@@ -1,8 +1,18 @@
-import { currentLang } from './lang.js';
-import { flagCaps, flagShift } from './modifiters.js';
+import { getCurrentLang } from './lang.js';
+import { isCaps, isShift } from './modifiters.js';
+
+export const area = document.createElement('textarea');
+const areaWrapper = document.createElement('div');
+areaWrapper.classList.add('output-wrapper');
+areaWrapper.appendChild(area);
+area.classList.add('keyboard-output');
+area.setAttribute('type', 'text');
+document.querySelector('body').appendChild(areaWrapper);
+
+area.onkeydown = () => false;
 
 function paste(text) {
-  let [start, end] = [area.selectionStart, area.selectionEnd];
+  const [start, end] = [area.selectionStart, area.selectionEnd];
   area.value =
     area.value.substring(0, start) + text + area.value.substring(end);
   area.selectionStart = start + 1;
@@ -10,8 +20,7 @@ function paste(text) {
 }
 
 function del(direction) {
-  let [start, end] = [area.selectionStart, area.selectionEnd];
-  console.log(area.ariaRowIndex);
+  const [start, end] = [area.selectionStart, area.selectionEnd];
   if (direction === 'right') {
     area.value = area.value.substring(0, start) + area.value.substring(end + 1);
     area.selectionStart = start;
@@ -23,30 +32,30 @@ function del(direction) {
 }
 
 function arrows(keyCode) {
-  let val = document.querySelector(`.${keyCode} span`).innerHTML;
+  const val = document.querySelector(`.${keyCode} span`).innerHTML;
   paste(val);
 }
 
 export function input(keyCode) {
-  let key = document.querySelector(`.${keyCode} .${currentLang}`);
+  const key = document.querySelector(`.${keyCode} .${getCurrentLang()}`);
   if (key) {
     if (!key.classList.contains('control')) {
       let query = '.origin';
-      if (flagShift) {
+      if (isShift()) {
         query = '.alt';
       }
-      if (key.classList.contains('letter') && flagCaps) {
+      if (key.classList.contains('letter') && isCaps()) {
         query = '.alt';
-        if (flagShift) {
+        if (isShift()) {
           query = '.origin';
         }
       }
-      let val = key.querySelector(query)?.textContent;
+      const val = key.querySelector(query)?.textContent;
       if (val) paste(val);
     } else {
       switch (keyCode) {
         case 'Enter':
-          paste('\n\r');
+          paste('\n');
           break;
         case 'Tab':
           paste('\t');
@@ -69,13 +78,3 @@ export function input(keyCode) {
     }
   }
 }
-
-export const area = document.createElement('textarea');
-area.classList.add('keyboard-output');
-area.setAttribute('type', 'text');
-document.querySelector('body').appendChild(area);
-
-area.onkeydown = (e) => {
-  console.log('press textarea', e);
-  return false;
-};

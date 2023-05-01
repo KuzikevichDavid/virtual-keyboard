@@ -1,4 +1,4 @@
-import { DataSaver } from './dataSave.js';
+import { get, set } from './dataSave.js';
 
 const showRu = new CSSStyleSheet();
 showRu.insertRule('.ru { display: block; }');
@@ -10,14 +10,14 @@ showEn.insertRule('.en { display: block; }');
 const storageKey = 'lang';
 const defaultValue = 'en';
 
-const storage = new DataSaver();
-export let currentLang = defaultValue;
+let currentLang = defaultValue;
+export const getCurrentLang = () => currentLang;
 document.adoptedStyleSheets = [showEn];
 
 window.addEventListener('load', () => {
-  currentLang = storage.get(storageKey);
+  currentLang = get(storageKey);
   if (!currentLang) {
-    storage.set(storageKey, defaultValue);
+    set(storageKey, defaultValue);
     currentLang = defaultValue;
   }
   if (currentLang === 'ru') {
@@ -42,5 +42,5 @@ export function changeLang() {
     idx = document.adoptedStyleSheets.findIndex((x) => x === showEn);
     document.adoptedStyleSheets[idx] = showRu;
   }
-  storage.set(storageKey, currentLang);
+  set(storageKey, currentLang);
 }

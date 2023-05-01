@@ -10,8 +10,10 @@ const caseUpHide = new CSSStyleSheet();
 caseUpShow.replaceSync('.alt { display: block !important; }');
 caseUpHide.replaceSync('.alt { display: none; }');
 
-export let flagCaps = false;
-export let flagShift = false;
+let flagCaps = false;
+export const isCaps = () => flagCaps;
+let flagShift = false;
+export const isShift = () => flagShift;
 let langFlag = false;
 
 const capsShow = new CSSStyleSheet();
