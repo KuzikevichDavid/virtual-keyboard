@@ -1,6 +1,5 @@
-import { input } from './input.js';
-import { caps, shiftDown, shiftUp } from './modifiters.js';
-// import { disAnimation, doAnimation } from './index.js';
+import { input } from './input';
+import { caps, shiftDown, shiftUp } from './modifiters';
 
 export default async function genKeyboard(disAnimation, doAnimation) {
   const responseEn = await fetch('./scripts/jsonData/en.json');

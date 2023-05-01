@@ -1,5 +1,5 @@
-import { getCurrentLang } from './lang.js';
-import { isCaps, isShift } from './modifiters.js';
+import { getCurrentLang } from './lang';
+import { isCaps, isShift } from './modifiters';
 
 export const area = document.createElement('textarea');
 const areaWrapper = document.createElement('div');

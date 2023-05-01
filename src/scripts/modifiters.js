@@ -1,4 +1,4 @@
-import { changeLang, getCurLang } from './lang.js';
+import { changeLang, getCurLang } from './lang';
 
 const caseDownShow = new CSSStyleSheet();
 const caseDownHide = new CSSStyleSheet();
