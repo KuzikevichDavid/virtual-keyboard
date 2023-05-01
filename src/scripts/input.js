@@ -1,3 +1,4 @@
+import { currentLang } from "./lang.js";
 import { flagCaps, flagShift } from "./modifiters.js";
 
 function paste(text) {
@@ -24,7 +25,7 @@ function del(direction) {
 }
 
 export function input(keyCode) {
-  let key = document.querySelector(`.${keyCode}`);
+  let key = document.querySelector(`.${keyCode} .${currentLang}`);
   if (key) {
     if (!key.classList.contains('control')) {
       let query = '.origin';

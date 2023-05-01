@@ -32,6 +32,7 @@ function initLangKey(key, langStyle) {
   langKey.appendChild(langKeyAlt);
   langKey.appendChild(langKeyOrigin);
   langKey.classList.add(langStyle);
+  langKey.classList.add(key.type);
   return langKey;
 }
 
@@ -39,8 +40,8 @@ function initControlKey(key, langStyleList, name) {
   langStyleList.forEach((langStyle) => {
     let langKey = document.createElement('button');
     langKey.classList.add(langStyle);
+    langKey.classList.add(controlStyle);
     let langKeyName = document.createElement('span');
-    langKeyName.classList.add(controlStyle);
     langKeyName.textContent = name;
     langKey.appendChild(langKeyName);
     key.appendChild(langKey);
@@ -57,7 +58,6 @@ keyboardEn.forEach((key, i) => {
   let newKey = document.createElement('div');
   newKey.classList.add(keyStyle);
   newKey.classList.add(key.name);
-  newKey.classList.add(key.type);
 
   if (key.type === 'control') {
     switch (key.name) {

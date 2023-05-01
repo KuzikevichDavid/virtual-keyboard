@@ -2,12 +2,12 @@ import { changeLang, getCurLang } from "./lang.js";
 
 const caseDownShow = new CSSStyleSheet();
 const caseDownHide = new CSSStyleSheet();
-caseDownShow.replaceSync('.origin { display: block; }');
+caseDownShow.replaceSync('.origin { display: block !important; }');
 caseDownHide.replaceSync('.origin { display: none; }');
 
 const caseUpShow = new CSSStyleSheet();
 const caseUpHide = new CSSStyleSheet();
-caseUpShow.replaceSync('.alt { display: block; }');
+caseUpShow.replaceSync('.alt { display: block !important; }');
 caseUpHide.replaceSync('.alt { display: none; }');
 
 export let flagCaps = false;
@@ -15,21 +15,20 @@ export let flagShift = false;
 let langFlag = false;
 
 const capsShow = new CSSStyleSheet();
-capsShow.insertRule('[class^="letter"] .origin { display: none !important; }');
+capsShow.insertRule('.letter .origin { display: none !important; }');
+capsShow.insertRule('.letter .alt { display: block !important; }');
 
 const capsShiftShow = new CSSStyleSheet();
-capsShiftShow.insertRule('[class^="letter"] .alt { display: none !important; }');
-capsShiftShow.insertRule(
-  '[class^="letter"] .origin { display: block !important; }',
-);
+capsShiftShow.insertRule('.letter .alt { display: none !important; }');
+capsShiftShow.insertRule('.letter .origin { display: block !important; }');
 
 export const keyDown = (e) => {
   if (e.shiftKey) {
     flagShift = true;
-    document.adoptedStyleSheets = [caseUpShow, caseDownHide];
+    document.adoptedStyleSheets = [caseUpShow, caseDownHide, getCurLang()];
 
     if (flagCaps) {
-      document.adoptedStyleSheets = [capsShiftShow, caseUpShow, caseDownHide];
+      document.adoptedStyleSheets = [capsShiftShow, caseUpShow, caseDownHide, getCurLang()];
     }
   }
 
