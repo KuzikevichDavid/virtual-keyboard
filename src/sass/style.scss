@@ -1,0 +1,54 @@
+.keyboard {
+  width: 600px;
+  // align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.output-wrapper {
+  width: 600px;
+  display: flex;
+}
+
+.keyboard-output {
+  height: 200px;
+  flex-grow: 1;
+}
+
+.keyboard-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  &__key {
+    min-width: 35px;
+    height: 35px;
+    flex-grow: 1;
+    display: flex;
+  }
+}
+
+.Space .en,
+.Space .ru {
+  width: 330px;
+}
+
+.en,
+.ru {
+  border-radius: 4px;
+  flex-grow: 1;
+  background-color: inherit;
+  transition: all 0.5s linear;
+}
+
+.highlights {
+  background-color: blueviolet;
+}
+
+.alt {
+  vertical-align: super;
+}
+
+.letter .alt {
+  display: none;
+}
