@@ -23,6 +23,8 @@ export default async function genKeyboard(disAnimation, doAnimation) {
   let idx = 0;
   let keyRow;
 
+  let highlightItem;
+
   function initLangKey(key, langStyle) {
     const langKeyOrigin = document.createElement('span');
     langKeyOrigin.classList.add(originStyle);
@@ -114,10 +116,15 @@ export default async function genKeyboard(disAnimation, doAnimation) {
         input(elem);
       });
     }
-    newKey.addEventListener('mousedown', () => doAnimation(key.name));
-    newKey.addEventListener('mouseup', () => disAnimation(key.name));
+    newKey.addEventListener('mousedown', () => {
+      highlightItem = key.name;
+      doAnimation(key.name);
+    });
   });
 
   keyboard.appendChild(keyRow);
+  document.addEventListener('mouseup', () => {
+    if (highlightItem) disAnimation(highlightItem);
+  });
   document.querySelector('body').appendChild(keyboard);
 }
