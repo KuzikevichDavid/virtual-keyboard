@@ -1,4 +1,4 @@
-import { input } from './input';
+import { area, input } from './input';
 import { caps, shiftDown, shiftUp } from './modifiters';
 
 export default async function genKeyboard(disAnimation, doAnimation) {
@@ -103,6 +103,7 @@ export default async function genKeyboard(disAnimation, doAnimation) {
       newKey.addEventListener('mouseup', () => caps());
     } else {
       newKey.addEventListener('mouseup', (e) => {
+        area.focus();
         let elem;
         const position = 1;
         if (e.target instanceof HTMLSpanElement) {
